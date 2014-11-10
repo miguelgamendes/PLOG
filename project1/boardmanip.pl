@@ -2,7 +2,10 @@
 * ALL STANDARD FUNCTIONS FOR BOARD MANIPULATION *
 ************************************************/
 
-generateEmptyBoard(X) :- /* provide an empty list of lists [[]] */
+?- use_module(library(random)).
+
+/* Empty board generation */
+generateEmptyBoard(X) :- 
 	generateEmptyBoardAux(L1, 1),
 	generateEmptyBoardAux(L2, 2),
 	generateEmptyBoardAux(L3, 3),
@@ -50,3 +53,17 @@ generateEmptyBoardAux(L, N) :-
 generateEmptyBoardAux(L, N) :-
 	N == 9,
 	append([],['#','#','#','#',' ',' ',' ',' ',' '],L).
+
+/* Game board generation */
+/*generateGameBoard(X) :-*/
+	
+generateRandomPiece(X) :-
+	random(0, 2, N),
+	returnPiece(N, X).
+
+returnPiece(N, X) :-
+	N == 0,
+	X = 'B'.
+returnPiece(N, X) :-
+	N == 1,
+	X = 'W'.

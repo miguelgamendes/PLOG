@@ -24,6 +24,3 @@ emptyBoard([[' ',' ',' ',' ',' ','#','#','#','#'],
 /*	input turno 1	*/
 /*	input turno 2	*/
 /*	playGame.		*/
-
-aptest([X|Xs],Z) :-
-	append(X, [' '], Z).
