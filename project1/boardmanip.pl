@@ -1,3 +1,7 @@
+/************************************************
+* ALL STANDARD FUNCTIONS FOR BOARD MANIPULATION *
+************************************************/
+
 generateEmptyBoard(X) :- /* provide an empty list of lists [[]] */
 	generateEmptyBoardAux(L1, 1),
 	generateEmptyBoardAux(L2, 2),

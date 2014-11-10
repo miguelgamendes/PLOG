@@ -1,3 +1,7 @@
+/*******************************
+* MAIN FUNCTIONS AND GAME LOOP *
+*******************************/
+
 :- include('output.pl').
 :- include('boardmanip.pl').
 
