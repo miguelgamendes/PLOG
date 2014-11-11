@@ -91,3 +91,28 @@ linePiece([L|Ls], N, X, Piece) :-
 	N < X,
 	N2 is N + 1,
 	linePiece(Ls, N2, X, Piece).
+
+/* Board piece edit */
+changePieceAt(Board1, X, Y, Piece, Board2) :-
+	changePiece(Board1, 0, X, Y, Piece, Board2).
+
+changePiece([B|Bs], N, X, Y, Piece, Board2) :-
+	N == Y,
+	changeLinePiece(B, 0, X, Piece, BoardAux),
+	append([BoardAux], Bs, Board2).
+
+changePiece([B|Bs], N, X, Y, Piece, Board2) :-
+	N < Y,
+	N2 is N + 1,
+	changePiece(Bs, N2, X, Y, Piece, BoardAux),
+	append([B], BoardAux, Board2).
+
+changeLinePiece([L|Ls], N, X, Piece, L2) :-
+	N == X,
+	append([Piece], Ls, L2).
+
+changeLinePiece([L|Ls], N, X, Piece, L2) :-
+	N < X,
+	N2 is N + 1,
+	changeLinePiece(Ls, N2, X, Piece, Laux),
+	append([L], Laux, L2).
