@@ -56,6 +56,7 @@ generateEmptyBoardAux(L, N) :-
 
 /* Game board generation */
 /*generateGameBoard(X) :-*/
+
 	
 generateRandomPiece(X) :-
 	random(0, 2, N),
@@ -67,3 +68,26 @@ returnPiece(N, X) :-
 returnPiece(N, X) :-
 	N == 1,
 	X = 'W'.
+
+/* Game board access */
+boardElementAt(Board, X, Y, Piece) :-
+	boardLine(Board, 0, Y, Line),
+	linePiece(Line, 0, X, Piece).
+
+boardLine([B|Bs], N, Y, Line) :-
+	N == Y,
+	append([], B, Line).
+
+boardLine([B|Bs], N, Y, Line) :-
+	N < Y,
+	N2 is N + 1,
+	boardLine(Bs, N2, Y, Line).
+
+linePiece([L|Ls], N, X, Piece) :-
+	N == X,
+	Piece = L.
+
+linePiece([L|Ls], N, X, Piece) :-
+	N < X,
+	N2 is N + 1,
+	linePiece(Ls, N2, X, Piece).
