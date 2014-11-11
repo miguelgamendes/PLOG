@@ -16,7 +16,9 @@ emptyBoard([[' ',' ',' ',' ',' ','#','#','#','#'],
 			['#','#','#','#',' ',' ',' ',' ',' ']
 			]).
 
-/*generateEmptyBoard() :-*/
+start(X) :-
+	generateGameBoard(X),
+	checkPotential(X,4,4,N).
 
 
 /*playGame() :-		*/

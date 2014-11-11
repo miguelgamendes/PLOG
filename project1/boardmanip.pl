@@ -183,3 +183,48 @@ changeLinePiece([L|Ls], N, X, Piece, L2) :-
 	changeLinePiece(Ls, N2, X, Piece, Laux),
 	append([L], Laux, L2).
 
+/* Moving pieces */
+movePieceTo(Board1, X1, Y1, X2, Y2, Board2) :-
+	boardElementAt(Board1, X1, Y1, Piece),
+	changePieceAt(Board1, X1, Y1, ' ', BoardAux),
+	changePieceAt(BoardAux, X2, Y2, Piece, Board2).
+
+/* Check valid plays */
+getValidPlays(Board, X, Y, PlayList) :-
+	boardElementAt(Board, X, Y, Piece).
+
+checkPotential(Board, X, Y, N) :-
+	boardElementAt(Board, X, Y, Piece),
+	X1 is X + 1,
+	Y1 is Y,
+	checkPotentialAt(Board, Piece, X1, Y1, N, FinalN1), /* check right-side element */
+	X2 is X - 1,
+	Y2 is Y,
+	checkPotentialAt(Board, Piece, X2, Y2, N, FinalN2), /* check left-side element */
+	X3 is X,
+	Y3 is Y - 1,
+	checkPotentialAt(Board, Piece, X3, Y3, N, FinalN3), /* check upper element */
+	X4 is X,
+	Y4 is Y + 1,
+	checkPotentialAt(Board, Piece, X4, Y4, N, FinalN4), /* check under element */
+	X5 is X - 1,
+	Y5 is Y - 1,
+	checkPotentialAt(Board, Piece, X5, Y5, N, FinalN5), /* check first diagonal */
+	X6 is X + 1,
+	Y6 is Y + 1,
+	checkPotentialAt(Board, Piece, X6, Y6, N, FinalN6), /* check second duagonal */
+	FinalAux1 is FinalN1 + FinalN2,
+	FinalAux2 is FinalAux1 + FinalN3,
+	FinalAux3 is FinalAux2 + FinalN4,
+	FinalAux4 is FinalAux3 + FinalN5,
+	N is FinalAux4 + FinalN6.
+
+checkPotentialAt(Board, Piece, X, Y, N, FinalN) :-
+	boardElementAt(Board, X, Y, CheckPiece),
+	CheckPiece == Piece,
+	FinalN is N + 1.
+
+checkPotentialAt(Board, Piece, X, Y, N, FinalN) :-
+	boardElementAt(Board, X, Y, CheckPiece),
+	CheckPiece \== Piece,
+	FinalN is N.
