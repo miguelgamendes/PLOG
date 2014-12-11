@@ -1,19 +1,38 @@
+/* main loop */
+
 :- use_module(library(clpfd)).
 
 :- include('logic.pl').
 
-:- 	write('****************************\n'),
-	write('* start. - Starts the game *\n'),
-	write('*                          *\n'),
-	write('*         WARNING:         *\n'),
-	write('*     May contain nuts     *\n'),
-	write('****************************\n').
+:- 	write('******************************\n'),
+	write('******************************\n'),
+	write('** start. - Starts the game **\n'),
+	write('**                          **\n'),
+	write('**         WARNING:         **\n'),
+	write('**     May contain nuts     **\n'),
+	write('******************************\n'),
+	write('******************************\n').
 
 start :-
-	write('ATTEMPTING TO DRIVE YA NUTS'), /* isto permite comecar um jogo sem chamar clausula */
-	/* game will be called here */
+	write('ATTEMPTING TO DRIVE YA NUTS\n\n'), /* isto permite comecar um jogo sem chamar clausula */
+	driveyanuts(X),
 	write('NUTS HAVE BEEN DRIVEN').
 
-/*
-driveyanuts() :-
-	.*/
+driveyanuts(X) :-
+	write('What kind of game do you wanted solved?\n\n'),
+	write('standard - A common game, with normal pieces. Has a single solution.\n'),
+	write('dynamic - A game will be generated with a customised number of pieces. A solution is not guaranteed.\n'),
+	read(Mode),
+	generateBoard(Mode, Board),
+	solveNuts(Board, Mode),
+	playAgain(X).
+
+playAgain(X) :-
+	write('Do you wish to be driven nuts again? (Y/N)\n'),
+	read(Choice),
+	processChoice(Choice).
+
+processChoice('N').
+
+processChoice('Y') :-
+	driveyanuts(X).
