@@ -38,19 +38,35 @@ getStandardBoardPiece([Board|BoardS], Position, Piece) :-
 	getStandardBoardPiece(Board2, Position2, Piece).
 
 solveNuts(Board, 'standard') :-
-	/* get pieces */
-	element(1, Board, Piece),
-	element(2, Board, Piece2),
-	/* get elements */
-	element(1, Piece, Top1),
-	element(2, Piece, TopRight1),
-	element(3, Piece, BottomRight1),
-	element(4, Piece, Bottom1),
-	element(5, Piece, BottomLeft1),
-	element(6, Piece, TopLeft1),
-	element(4, Piece2, Bottom2),
-	/* constrain */
-	Top1 #= Bottom2.
+	checkStandardPieceValidity(Board, 0, 0).
 
-checkPieceValidity(Piece, 0, Rotation) :-
-	.*
+checkStandardPieceValidity(Board, 0, Rotation) :-
+	getStandardBoardPiece(Board, 0, MiddlePiece),
+	getStandardBoardPiece(Board, 1, TopPiece),
+	getStandardBoardPiece(Board, 2, TopRightPiece),
+	getStandardBoardPiece(Board, 3, BottomRightPiece),
+	getStandardBoardPiece(Board, 4, BottomPiece),
+	getStandardBoardPiece(Board, 5, BottomLeftPiece),
+	getStandardBoardPiece(Board, 6, TopLeftPiece),
+	element(1, MiddlePiece, MiddleElement1),
+	element(2, MiddlePiece, MiddleElement2),
+	element(3, MiddlePiece, MiddleElement3),
+	element(4, MiddlePiece, MiddleElement4),
+	element(5, MiddlePiece, MiddleElement5),
+	element(6, MiddlePiece, MiddleElement6),
+	element(4, TopPiece, TopElement4),
+	element(5, TopRightPiece, TopRightElement5),
+	element(6, BottomRightPiece, BottomRightElement6),
+	element(1, BottomPiece, BottomElement1),
+	element(2, BottomLeftPiece, BottomLeftElement2),
+	element(3, TopLeftPiece, TopLeftElement3),
+	MiddleElement1 #= TopElement4,
+	MiddleElement2 #= TopRightElement5,
+	MiddleElement3 #= BottomRightElement6,
+	MiddleElement4 #= BottomElement1,
+	MiddleElement5 #= BottomLeftElement2,
+	MiddleElement6 #= TopLeftElement3,
+	write('Middle piece: VALID\n').
+
+checkStandardPieceValidity(Board, 0, Rotation) :-
+	write('FAILED').
