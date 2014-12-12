@@ -21,10 +21,10 @@ start :-
 driveyanuts(X) :-
 	write('What kind of game do you wanted solved?\n\n'),
 	write('standard - A common game, with normal pieces. Has a single solution.\n'),
-	write('dynamic - A game will be generated with a customised number of pieces. A solution is not guaranteed.\n'),
+	write('dynamic - This does nothing yet :v\n'),
 	read(Mode),
-	generateBoard(Mode, Board),
-	solveNuts(Board, Mode),
+	generateBoard(Mode, Board, BoardToSolve),
+	solveNuts(BoardToSolve, Mode),
 	playAgain(X).
 
 playAgain(X) :-

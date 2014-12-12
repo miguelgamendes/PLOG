@@ -28,17 +28,29 @@ generateBoard('standard', Board, FinalBoard) :-
 
 generateBoard('dynamic', Board).
 
+getStandardBoardPiece([B|Bs], 0, Piece) :-
+	Piece = B.
+
+getStandardBoardPiece([Board|BoardS], Position, Piece) :-
+	Position > 0,
+	Position2 is Position - 1,
+	Board2 = BoardS,
+	getStandardBoardPiece(Board2, Position2, Piece).
+
 solveNuts(Board, 'standard') :-
 	/* get pieces */
-	element_at(1, Board, Piece),
-	element_at(2, Board, Piece2),
+	element(1, Board, Piece),
+	element(2, Board, Piece2),
 	/* get elements */
-	element_at(1, Piece, Top1),
-	element_at(2, Piece, TopRight1),
-	element_at(3, Piece, BottomRight1),
-	element_at(4, Piece, Bottom1),
-	element_at(5, Piece, BottomLeft1),
-	element_at(6, Piece, TopLeft1),
-	element_at(4, Piece2, Bottom2),
+	element(1, Piece, Top1),
+	element(2, Piece, TopRight1),
+	element(3, Piece, BottomRight1),
+	element(4, Piece, Bottom1),
+	element(5, Piece, BottomLeft1),
+	element(6, Piece, TopLeft1),
+	element(4, Piece2, Bottom2),
 	/* constrain */
 	Top1 #= Bottom2.
+
+checkPieceValidity(Piece, 0, Rotation) :-
+	.*
