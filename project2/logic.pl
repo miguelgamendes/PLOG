@@ -38,7 +38,8 @@ getStandardBoardPiece([Board|BoardS], Position, Piece) :-
 	getStandardBoardPiece(Board2, Position2, Piece).
 
 solveNuts(Board, 'standard') :-
-	checkStandardPieceValidity(Board, 0, 0).
+	checkStandardPieceValidity(Board, 0, 0),
+	checkStandardPieceValidity(Board, 1, 0).
 
 checkStandardPieceValidity(Board, 0, Rotation) :-
 	getStandardBoardPiece(Board, 0, MiddlePiece),
@@ -69,4 +70,35 @@ checkStandardPieceValidity(Board, 0, Rotation) :-
 	write('Middle piece: VALID\n').
 
 checkStandardPieceValidity(Board, 0, Rotation) :-
-	write('FAILED').
+	write('Middle Piece: FAILED\n').
+
+checkStandardPieceValidity(Board, 1, Rotation) :-
+	getStandardBoardPiece(Board, 1, TopPiece),
+	getStandardBoardPiece(Board, 6, TopLeftPiece),
+	getStandardBoardPiece(Board, 0, MiddlePiece),
+	getStandardBoardPiece(Board, 2, TopRightPiece),
+	element(5, TopPiece, TopElement5),
+	element(4, TopPiece, TopElement4),
+	element(3, TopPiece, TopElement3),
+	element(2, TopLeftPiece, TopLeftElement2),
+	element(1, MiddlePiece, MiddleElement1),
+	element(6, TopRightPiece, TopRightElement6),
+	TopElement5 #= TopLeftElement2,
+	TopElement4 #= MiddleElement1,
+	TopElement3 #= TopRightElement6,
+	write('Top Piece: VALID\n').
+
+checkStandardPieceValidity(board, 1, Rotation) :-
+	write('Top Piece: FAILED\n').
+
+checkStandardPieceValidity(Board, 2, Rotation) :-
+	getStandardBoardPiece(Board, 2, TopRightPiece),
+	getStandardBoardPiece(Board, 1, TopPiece),
+	getStandardBoardPiece(Board, 0, MiddlePiece),
+	getStandardBoardPiece(Board, 3, BottomRightPiece),
+	element(6, TopRightPiece, TopRightElement6),
+	element(5, TopRightPiece, TopRightElement5),
+	element(4, TopRightPiece, TopRightElement4),
+	element(3, TopPiece, TopElement3),
+	element(2, MiddlePiece, MiddleElement2),
+	element(1, )
