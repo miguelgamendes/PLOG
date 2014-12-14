@@ -41,6 +41,21 @@ getStandardBoardPiece([Board|BoardS], Position, Piece) :-
 	Board2 = BoardS,
 	getStandardBoardPiece(Board2, Position2, Piece).
 
+getPieceElement(ElementNumber, Piece, Element) :-
+	ElementNumber >= 1,
+	ElementNumber =< 6,
+	element(ElementNumber, Piece, Element).
+
+getPieceElement(ElementNumber, Piece, Element) :-
+	ElementNumber < 1,
+	CorrectedElementNumber is ElementNumber + 6,
+	element(CorrectedElementNumber, Piece, Element).
+
+getPieceElement(ElementNumber, Piece, Element) :-
+	ElementNumber > 6,
+	CorrectedElementNumber is ElementNumber - 6,
+	element(CorrectedElementNumber, Piece, Element).
+
 solveNuts(Board, 'standard') :-
 	Rotations = [R0, R1, R2, R3, R4, R5, R6],
 	domain(Rotations, 0, 5),
@@ -59,6 +74,17 @@ solveNuts(Board, 'standard') :-
 	write('Bottom Piece Rotation: '), write(R4), write('\n'),
 	write('Bottom Left Piece Rotation: '), write(R5), write('\n'),
 	write('Top Left Piece Rotation: '), write(R6), write('\n').
+
+solveNuts2(Board, 'standard') :-
+	Rotations = [R0, R1, R2, R3, R4, R5, R6],
+	/* get all pieces */
+	getStandardBoardPiece(Board, 0, MiddlePiece),
+	getStandardBoardPiece(Board, 1, TopPiece),
+	getStandardBoardPiece(Board, 2, TopRightPiece),
+	getStandardBoardPiece(Board, 3, BottomRightPiece),
+	getStandardBoardPiece(Board, 4, BottomPiece),
+	getStandardBoardPiece(Board, 5, BottomLeftPiece),
+	getStandardBoardPiece(Board, 6, TopLeftPiece).
 
 solveNuts(Board, 'dynamic').
 
