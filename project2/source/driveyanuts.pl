@@ -24,7 +24,7 @@ driveyanuts(X) :-
 	write('dynamic - This does nothing yet :v\n'),
 	read(Mode),
 	generateBoard(Mode, Board, BoardToSolve),
-	solveNuts(BoardToSolve, Mode),
+	solveTestNuts(BoardToSolve, Mode),
 	playAgain(X).
 
 playAgain(X) :-
