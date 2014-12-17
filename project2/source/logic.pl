@@ -204,8 +204,11 @@ solveNuts2(Board, 'standard') :-
 	write('Top Left Piece Rotation: '), write(R6), write('\n').
 
 solveTestNuts(Board, 'standard') :-
+	Positions = [P0, P1, P2, P3, P4, P5, P6],
 	Rotations = [R0, R1, R2, R3, R4, R5, R6],
+	domain(Positions, 0, 6),
 	domain(Rotations, 0, 5),
+	all_different(Positions),
 	/* get pieces */
 	getStandardBoardPiece(Board, 0, MiddlePiece),
 	getStandardBoardPiece(Board, 1, TopPiece),
