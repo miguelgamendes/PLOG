@@ -181,7 +181,7 @@ solveNuts2(Board, 'standard') :-
 	getPieceElement(RotateTopLeft5, TopLeftPiece, TopLeftElement5),
 	getPieceElement(RotateTopLeft6, TopLeftPiece, TopLeftElement6),
 	/* constrain */
-	MiddleElement1 #= TopElement1,
+	MiddleElement1 #= TopElement4,
 	MiddleElement2 #= TopRightElement5,
 	MiddleElement3 #= BottomRightElement6,
 	MiddleElement4 #= BottomElement1,
@@ -301,7 +301,7 @@ solveTestNuts(Board, 'standard') :-
 	element(RotatedTopLeft5, TopLeftPiece, TopLeftElement5),
 	element(RotatedTopLeft6, TopLeftPiece, TopLeftElement6),
 	/* be a nice dude, and constrain stuff */
-	MiddleElement1 #= TopElement1,
+	MiddleElement1 #= TopElement4,
 	MiddleElement2 #= TopRightElement5,
 	MiddleElement3 #= BottomRightElement6,
 	MiddleElement4 #= BottomElement1,
